@@ -33,6 +33,17 @@ Key components include:
 ### Performance
 Different strategies were compared, showing significant improvements in IPC (Instructions Per Cycle) with data forwarding and branch prediction techniques.
 
+#### Performance Table
+| Strategy | Performance |
+| --- | --- |
+| Baseline (ID stage branch resolution, always taken) | 2002 cycle |
+| Baseline (MEM stage branch resolution, always taken) | 2248 cycle |
+| Data-forwarding, always-taken | 1452 cycle |
+| Data-forwarding, 2-bit saturation counter | 1473 cycle |
+| Data-forwarding, 2-bit hysteresis counter | 1461 cycle |
+
+Figure 1. Performance of pipelined CPU
+
 ## Cached CPU
 
 ### Introduction
@@ -48,6 +59,22 @@ This project explores the impact of cache memory on CPU performance. A direct-ma
 
 ### Performance
 The introduction of cache significantly improved CPU performance, reducing the number of cycles required to execute instructions and increasing the IPC.
+
+#### Performance Table
+| Strategy | Performance | IPC |
+| --- | --- | --- |
+| Baseline | 3453 | 0.2844 |
+| Write-through/write-no-allocate direct-mapped cache | 2840 | 0.3458 |
+
+Figure 2. Performance comparison
+
+#### Cache Hit Rate
+| Cache | Hit Rate |
+| --- | --- |
+| I-Cache | 0.9167 |
+| D-Cache | 0.9750 |
+
+Figure 3. Cache hit rate
 
 ## Direct Memory Access (DMA)
 
@@ -65,11 +92,10 @@ This project focuses on the implementation of Direct Memory Access (DMA) to unde
 ### Performance
 Comparative analysis shows that cycle stealing DMA reduces the CPU stall times due to cache misses, leading to better overall performance.
 
-## Usage
-To simulate and test each implementation, navigate to the corresponding directory and use a Verilog simulator (e.g., ModelSim or Icarus Verilog) to run the provided testbenches.
+#### Performance Comparison
+| Strategy | Clock | Finish Time |
+| --- | --- | --- |
+| Baseline | 2849 | 285050 ns |
+| Extra | 2843 | 284450 ns |
 
-```bash
-# Navigate to the Pipelined CPU directory
-cd pipelined_cpu
-# Run the simulation
-make simulate
+Figure 4. Performance comparison between baseline and extra at FIRE_TIME 19000ns
